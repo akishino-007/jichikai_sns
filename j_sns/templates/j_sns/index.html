@@ -4,7 +4,7 @@
 {% block h1 %}小倉町自治会　情報一覧{% endblock %}
 
 {% block content %}
-    {% for item in object_list %}
+    {% for item in page_obj.object_list %}
     <div class="p-2 m-2 bg-light border border-success rounded">
         <h5>【{{ item.get_category_display }}】</h5>
         <h4 class="text-success">{{ item.title }}</h4>
@@ -15,4 +15,5 @@
         </div>
     </div>
     {% endfor %}
+    {% include 'j_sns/components/pagenation.html' %}
 {% endblock content %}

@@ -10,8 +10,11 @@ from django.views.generic import (
     DeleteView,
     UpdateView,
 )
+from django.core.paginator import Paginator
 
 from .models import Info, Review
+from .consts import ITEM_PER_PAGE
+
 
 # Create your views here.
 
@@ -23,18 +26,22 @@ def logout_view(request):
 class ListJSnsView(LoginRequiredMixin, ListView):
     template_name = 'j_sns/j_sns_list.html'
     model = Info
+    paginate_by = ITEM_PER_PAGE
 
 class ListJSnskairanView(LoginRequiredMixin, ListView):
     template_name = 'j_sns/j_sns_kairan_list.html'
     model = Info
+    paginate_by = ITEM_PER_PAGE
 
 class ListJSnskeijibanView(LoginRequiredMixin, ListView):
     template_name = 'j_sns/j_sns_keijiban_list.html'
     model = Info
+    paginate_by = ITEM_PER_PAGE
 
 class ListJSnsosiraseView(LoginRequiredMixin, ListView):
     template_name = 'j_sns/j_sns_osirase_list.html'
     model = Info
+    paginate_by = ITEM_PER_PAGE
 
 class DetailJSnsView(LoginRequiredMixin, DetailView):
     template_name = 'j_sns/j_sns_detail.html'
@@ -90,7 +97,10 @@ class UpdateJSnsView(LoginRequiredMixin, UpdateView):
 
 def index_view(request):
     object_list = Info.objects.all()
-    return render(request, 'j_sns/index.html', {'object_list': object_list})
+    paginator = Paginator(object_list, ITEM_PER_PAGE)
+    page_number = request.GET.get('page',1)
+    page_obj = paginator.page(page_number)
+    return render(request, 'j_sns/index.html', {'page_obj': page_obj},)
 
 class CreateReviewView(CreateView):
     model = Review
