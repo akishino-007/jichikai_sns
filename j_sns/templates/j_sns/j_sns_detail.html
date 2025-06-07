@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}{{ object.title }}{% endblock %}
+{% block h1 %}情報詳細{% endblock %}
+
+{% block content %}
+    <div class="p-2 m-2 bg-light borer border-success rounded">
+        <h5>【{{ object.get_category_display }}】</h5>
+        <h3 class="text-success">{{ object.title }}</h3>
+        <p>内容：{{ object.content }}</p>
+        <p>投稿日：{{ object.created_at }}</p>
+        <div class="d-flex">
+        {% if object.thumbnail1 %}
+            <a href="{{ object.thumbnail1.url }}" data-lightbox="gallery">
+                <img src="{{ object.thumbnail1.url }}" alt="サムネイル" style="width: 200px; height: auto;">
+            </a>
+            {% else %}
+                <p></p>
+        {% endif %}
+        {% if object.thumbnail2 %}
+            <!-- <img src="{{ object.thumbnail2.url }}" class="img-thumbnail"  style="width: 200px;" />-->  
+            <a href="{{ object.thumbnail2.url }}" data-lightbox="gallery">
+                <img src="{{ object.thumbnail2.url }}" alt="サムネイル" style="width: 200px; height: auto;">
+            </a>
+            {% else %}
+                <p></p>
+        {% endif %}
+        {% if object.thumbnail3 %}
+            <!-- <img src="{{ object.thumbnail2.url }}" class="img-thumbnail"  style="width: 200px;" />-->  
+            <a href="{{ object.thumbnail3.url }}" data-lightbox="gallery">
+                <img src="{{ object.thumbnail3.url }}" alt="サムネイル" style="width: 200px; height: auto;">
+            </a>
+            {% else %}
+                <p></p>
+        {% endif %}
+        
+        </div>
+        <div class="border p-2 mb-2">
+            <h5>【コメント】</h5>
+            {% for review in reviews %}
+            <div>
+                <div class="px-2">
+                    <p class="p-1 m-1">{{ review.text }}</p>
+                    <p>（投稿ユーザー：{{ review.user.username }}）</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <br>
+        <a href="{% url 'list-jsns' %}" class="btn btn-primary">一覧へ</a>
+        <a href="{% url 'review' object.pk %}" class="btn btn-primary">コメントする</a>
+        {% if user.is_superuser %}
+            <a href="{% url 'update-jsns' object.pk %}" class="btn btn-primary">編集する</a>
+            <a href="{% url 'delete-jsns' object.pk %}" class="btn btn-primary">削除する</a>
+        {% endif %}
+    </div>
+{% endblock content %}
+

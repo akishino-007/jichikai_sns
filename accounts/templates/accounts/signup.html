@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}アカウント作成{% endblock %}
+{% block h1 %}アカウント作成{% endblock %}
+{% block content %}
+<form method="post" class="mb-1 px-2 mx-2 bg-light border border-success rounded">
+    {% csrf_token %}
+
+    {# 全体のエラーメッセージ表示（例：パスワード不一致） #}
+    {% if form.non_field_errors %}
+        <div class="alert alert-danger">
+            {{ form.non_field_errors }}
+        </div>
+    {% endif %}
+
+    <label class="form-label">ユーザ ID（任意の英数字でログインに必要です）</label>
+    <p>{{ form.username }}</p>
+    {{ form.username.errors }}
+
+    <label class="form-label">パスワード（任意の英数字でログインに必要です</label>
+    <p>{{ form.password1 }}</p>
+    {{ form.password1.errors }}
+
+    <label class="form-label">パスワード確認用</label>
+    <p>{{ form.password2 }}</p>
+    {{ form.password2.errors }}
+
+    <label class="form-label">姓</label>
+    <p>{{ form.last_name }}</p>
+    {{ form.last_name.errors }}
+
+    <label class="form-label">名</label>
+    <p>{{ form.first_name }}</p>
+    {{ form.first_name.errors }}
+    
+    <label class="form-label">電子メールアドレス（連絡に必要です）</label>
+    <p>{{ form.email }}</p>
+    {{ form.email.errors }}
+   
+    <button type="submit" class="btn btn-success mt-2">登録する</button>
+</form>
+{% endblock %}

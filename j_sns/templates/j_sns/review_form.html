@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}コメント投稿{% endblock %}
+{% block h1 %}コメント投稿{% endblock %}
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data" class="p-4 m-4 bg-light border border-success rounded form-group">
+        {% csrf_token %}
+        <label>
+            対象情報
+        </label>
+        <input class="form-control" value="{{ j_sns.title }}" readonly> 
+        <input type="hidden" name="title" value="{{ j_sns.id }}">
+        <input type="hidden" name="j_sns" value="{{j_sns.id}}">
+        <label>
+            コメント
+        </label>
+        <textarea class="form-control" name="text" rows="3"></textarea>
+        <button type="submit" class="btn btn-success mt-4">コメントする</button>
+<!--        <label>
+            対象情報
+        </label>
+        <input class="form-control" value="{{ j_sns.title }}" readonly> 
+        <input type="hidden" name="j_sns" value="{{j_sns.id}}">   
+        {{form.as_p}} 
+        <label>
+            コメント
+        </label>
+        <textarea name="text" class="form-control" rows="3"></textarea> 
+             {{ form.text }}
+    <button type="submit" class="btn btn-success mt-4">コメントする</button>   --> 
+    </form>
+    
+<!--    <form method="post" class="p-4 m-4 bg-light border border-success rounded form-group">
+        {% csrf_token %}
+        <label>
+            対象情報
+        </label>
+        <input class="form-control" value="{{ j_sns.title }}" readonly>
+        <label>
+            コメント
+        </label>
+        <textarea name="text" class="form-control" rows="3"></textarea>
+
+        <input type="hidden" name="j_sns" value="{{ j_sns_id}}">
+        <button type="submit" class="btn btn-success mt-4">コメントする</button>
+
+    </form>
+    -->
+{% endblock content %}
