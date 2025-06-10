@@ -25,6 +25,7 @@ class Info(models.Model):
     thumbnail1 = models.ImageField(null=True, blank=True)
     thumbnail2 = models.ImageField(null=True, blank=True)
     thumbnail3 = models.ImageField(null=True, blank=True)
+    file = models.FileField(upload_to='uploads/', null=True, blank=True)  # ファイルをアッ
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     
     def __str__(self):

@@ -34,7 +34,8 @@
     {{ form.first_name.errors }}
     
     <label class="form-label">電子メールアドレス（連絡に必要です）</label>
-    <p>{{ form.email }}</p>
+    <p><input type="email" name="email" class="form-control w-100" style="max-width: 400px;"></p>
+    <!-- <p>{{ form.email }}</p>  -->
     {{ form.email.errors }}
    
     <button type="submit" class="btn btn-success mt-2">登録する</button>

@@ -32,8 +32,21 @@
             {% else %}
                 <p></p>
         {% endif %}
-        
+        <br>
         </div>
+        {% if object.file %}
+            <p>添付ファイル: <a href="{{ object.file.url }}" download>{{ object.file.name }}</a></p>
+        {% endif %}
+
+        <br>
+        <a href="{% url 'list-jsns' %}" class="btn btn-primary">一覧へ</a>
+        <a href="{% url 'review' object.pk %}" class="btn btn-primary">コメントする</a>
+        {% if user.is_superuser %}
+            <a href="{% url 'update-jsns' object.pk %}" class="btn btn-primary">編集する</a>
+            <a href="{% url 'delete-jsns' object.pk %}" class="btn btn-primary">削除する</a>
+            <a href="{% url 'create-jsns' %}" class="btn btn-primary">新規投稿する</a>
+        {% endif %} 
+        
         <div class="border p-2 mb-2">
             <h5>【コメント】</h5>
             {% for review in reviews %}
@@ -44,15 +57,7 @@
                 </div>
             </div>
             {% endfor %}
-        </div>
-        <br>
-        <a href="{% url 'list-jsns' %}" class="btn btn-primary">一覧へ</a>
-        <a href="{% url 'review' object.pk %}" class="btn btn-primary">コメントする</a>
-        {% if user.is_superuser %}
-            <a href="{% url 'update-jsns' object.pk %}" class="btn btn-primary">編集する</a>
-            <a href="{% url 'delete-jsns' object.pk %}" class="btn btn-primary">削除する</a>
-            <a href="{% url 'create-jsns' %}" class="btn btn-primary">新規投稿する</a>
-        {% endif %}
+        </div>       
     </div>
 {% endblock content %}
 

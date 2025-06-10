@@ -4,16 +4,14 @@
 {% block h1 %}お知らせ{% endblock %}
 
 {% block content %}
-    {% for item in object_list %}
-        {% if item.get_category_display == "お知らせ" %}
-            <div class="p-2 m-2 bg-light border border-success rounded">
-                <h5>【{{ item.get_category_display }}】</h5>
-                <h4 class="text-success">{{ item.title }}</h4>
-                <h6 >投稿日　{{ item.created_at }}</h6>
-                <div class="mt-3">
-                 <a href="{% url 'detail-jsns' item.pk %}">詳細へ</a>
-                </div>
+    {% for item in osirase_items %}
+        <div class="p-2 m-2 bg-light border border-success rounded">
+            <h5>【お知らせ】</h5>
+            <h4 class="text-success">{{ item.title }}</h4>
+            <h6>投稿日 {{ item.created_at }}</h6>
+            <div class="mt-3">
+                <a href="{% url 'detail-jsns' item.pk %}">詳細へ</a>
             </div>
-        {% endif %}
+        </div>
     {% endfor %}
 {% endblock content %}

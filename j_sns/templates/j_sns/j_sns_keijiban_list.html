@@ -4,16 +4,14 @@
 {% block h1 %}掲示板{% endblock %}
 
 {% block content %}
-    {% for item in object_list %}
-        {% if item.get_category_display == "掲示板" %}
-            <div class="p-2 m-2 bg-light border border-success rounded">
-                <h5>【{{ item.get_category_display }}】</h5>
-                <h4 class="text-success">{{ item.title }}</h4>
-                <h6 >投稿日　{{ item.created_at }}</h6>
-                <div class="mt-3">
-                 <a href="{% url 'detail-jsns' item.pk %}">詳細へ</a>
-                </div>
+    {% for item in keijiban_items %}
+        <div class="p-2 m-2 bg-light border border-success rounded">
+            <h5>【掲示板】</h5>
+            <h4 class="text-success">{{ item.title }}</h4>
+            <h6>投稿日 {{ item.created_at }}</h6>
+            <div class="mt-3">
+                <a href="{% url 'detail-jsns' item.pk %}">詳細へ</a>
             </div>
-        {% endif %}
+        </div>
     {% endfor %}
 {% endblock content %}

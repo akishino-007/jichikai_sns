@@ -26,7 +26,7 @@
         <!--  <a href="{% url 'accounts:logout' %}" class="nav-link mx-3">ログアウト</a>-->
           <form action="{% url 'logout' %}" method="post">
             {% csrf_token %}
-            <button type="submit">ログアウト</button>
+            <button type="submit" class="nav-link mx-3">ログアウト</button>
           </form>
         {% else %}
           <a href="{% url 'accounts:login' %}" class="nav-link mx-3">ログイン</a>
