@@ -1,13 +1,14 @@
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django import forms
 
+CustomUser = get_user_model()
 
 class SignupForm(UserCreationForm):
     email = forms.EmailField(required=True)
 
     class Meta:
-        model = User
+        model = CustomUser
         fields = ('username', 'password1', 'password2', 'last_name', 'first_name', 'email')
 
     def save(self, commit=True):
