@@ -1,9 +1,18 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth.models import User  # Django の標準 User をインポート
+from .models import CustomUser  
 
-# すでに登録されている場合は再登録しない
-if not admin.site.is_registered(User):
-    admin.site.register(User, UserAdmin)
+#if not admin.site.is_registered(CustomUser):
+#    admin.site.register(CustomUser, UserAdmin)
 
+class CustomUserAdmin(UserAdmin):
+    model = CustomUser
+    fieldsets = UserAdmin.fieldsets + (
+        ("追加情報", {"fields": ("bio", "birthyear", "kumi")}),
+    )
+    add_fieldsets = UserAdmin.add_fieldsets + (
+        ("追加情報", {"fields": ("bio", "birthyear", "kumi")}),
+    )
+
+admin.site.register(CustomUser, CustomUserAdmin)
 

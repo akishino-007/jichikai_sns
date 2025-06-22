@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path,include
 
 from .import views
 
@@ -13,5 +13,5 @@ urlpatterns = [
     path('j_sns/<int:pk>/delete/', views.DeleteJSnsView.as_view(), name='delete-jsns'),
     path('j_sns/<int:pk>/update/', views.UpdateJSnsView.as_view(), name='update-jsns'),
     path('j_sns/<int:j_sns_id>/review/', views.CreateReviewView.as_view(), name='review'),  
-    path('logout/', views.logout_view, name='logout'),
+    path('accounts/', include('allauth.urls')),
 ]
