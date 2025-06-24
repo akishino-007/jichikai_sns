@@ -18,11 +18,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from accounts.views import CustomConfirmEmailView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('accounts/', include('allauth.urls')),
-    path('accounts/', include(('allauth.urls', 'accounts'), namespace='accounts')),
+    path('accounts/confirm-email/<str:key>/', CustomConfirmEmailView.as_view(), name='account_confirm_email'),
+    path('accounts/', include('allauth.urls')),
+    path('accounts/', include('accounts.urls')),
     path('', include('j_sns.urls')),
 ]
 

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head_title %}
+  プロフィール登録
+{% endblock %}
+
+{% block content %}
+<div class="container my-5 bg-light p-4" style="max-width:400px;">
+  <h4 class="text-center mb-4">{{ user.username }}さん、登録が完了しました！</h4>
+  <p class="text-center">以下のプロフィール情報をご入力ください。</p>
+
+  <form method="post">
+    {% csrf_token %}
+    <div class="row">
+        <div class="form-group my-2 col-md-6">
+            <label for="last_name">姓：</label>
+            <input type="text" name="last_name" class="form-control" value="{{ user.last_name }}">
+        </div>
+        <div class="form-group my-2 col-md-6">
+            <label for="first_name">名：</label>
+            <input type="text" name="first_name" class="form-control" value="{{ user.first_name }}">
+        </div>
+    </div>
+
+    
+    <div class="form-group my-2">
+      <label for="birthyear">生まれ年（西暦）：入力しない場合は空欄で結構です</label>
+      <input type="number" name="birthyear" class="form-control" value="{{ user.birthyear|default_if_none:'' }}">
+    </div>
+    <div class="form-group my-2">
+      <label for="kumi">組番号（1～20）：必ず入れてください</label>
+      <input type="number" name="kumi" class="form-control" value="{{ user.kumi|default_if_none:'' }}" min="1" max="20">
+    </div>
+
+    <button type="submit" class="btn btn-primary form-control mt-4">登録して次へ</button>
+  </form>
+</div>
+{% endblock %}
